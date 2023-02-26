@@ -1,6 +1,5 @@
 #include <fstream>
 #include <cmath>
-#include <random>
 #include <cstdlib>
 #include <string>
 #include <ctime>
@@ -8,17 +7,20 @@
 const double MIN_ANGLE = -M_PI;
 const double MAX_ANGLE = M_PI;
 
-double generateRandomAngle() {
-    std::random_device randomDevice;
-    std::mt19937 generator(randomDevice());
-    std::uniform_real_distribution<double> unif(MIN_ANGLE, MAX_ANGLE);
+double randomDoube(double min, double max)
+{
+    double f = (double) rand() / RAND_MAX;
+    return min + f * (max - min);
+}
 
-    double angle = unif(generator);
-    return angle;
+double generateRandomAngle() {
+    return randomDoube(MIN_ANGLE, MAX_ANGLE);
 }
 
 int main(int argc, char const *argv[])
 {
+    std::srand(std::time(NULL));
+    generateRandomAngle();
     if (argc != 3) return -1;
     int anglesSetsCount = atoi(argv[1]);
     std::string fileName = argv[2];
