@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 
     std::ofstream out(fileName);
 
-    for (int i = 0; i < 10; i ++) {
+    for (int i = 0; i < anglesSetsCount; i ++) {
         double angle1, angle2, angle3;
         angle1 = generateRandomAngle();
         angle2 = generateRandomAngle();
