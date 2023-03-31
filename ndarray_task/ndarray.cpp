@@ -68,7 +68,6 @@ public:
     }
 
     NDArray<T> operator+( NDArray<T>& other)  {
-        check_shape(other);
         NDArray<T> result(shape);
         for (int i = 0; i < size(); ++i) {
             result.data[i] = data[i] + other.data[i];
@@ -77,7 +76,6 @@ public:
     }
 
     NDArray<T> operator-( NDArray<T>& other)  {
-        check_shape(other);
         NDArray<T> result(shape);
         for (int i = 0; i < size(); ++i) {
             result.data[i] = data[i] - other.data[i];
@@ -86,7 +84,6 @@ public:
     }
 
     NDArray<T> operator*( NDArray<T>& other)  {
-        check_shape(other);
         NDArray<T> result(shape);
         for (int i = 0; i < size(); ++i) {
             result.data[i] = data[i] * other.data[i];
@@ -95,7 +92,6 @@ public:
     }
 
     NDArray<T> operator/( NDArray<T>& other)  {
-        check_shape(other);
         NDArray<T> result(shape);
         for (int i = 0; i < size(); ++i) {
             if (other.data[i] == T(0)) {
