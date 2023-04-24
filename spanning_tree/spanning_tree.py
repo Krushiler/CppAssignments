@@ -6,48 +6,6 @@ import networkx as nx
 import shapely
 
 
-def get_spanning_tree(graph):
-    edges, nodes, buf = [], [], []
-    first_node = list(graph.nodes)[0]
-    nodes.append(first_node)
-
-    connected_edges = filter(lambda edge: edge not in nodes,
-                             graph.edges(first_node))
-    d = filter(lambda edge: edge not in nodes,
-               graph.edges(first_node))
-
-    min_edge = min(connected_edges,
-                   key=lambda e: graph.get_edge_data(*e)['weight'])
-    buf.append(min_edge[0])
-    buf.append(min_edge[1])
-    edges.append(min_edge +
-                 (graph.get_edge_data(*min_edge)['weight'],))
-    for node in graph.nodes:
-        if node in buf:
-            continue
-        nodes.append(node)
-
-        connected_edges = filter(lambda edge: edge not in nodes
-                                              and edge[1] in buf,
-                                 graph.edges(node))
-        d = filter(lambda edge: edge not in nodes and edge[1] in buf,
-                   graph.edges(node))
-
-        print(node, list(d))
-
-        min_edge = min(connected_edges,
-                       key=lambda e: graph.get_edge_data(*e)['weight'])
-        buf.append(min_edge[0])
-        buf.append(min_edge[1])
-        edges.append(min_edge +
-                     (graph.get_edge_data(*min_edge)['weight'],))
-
-    result = nx.Graph()
-    result.add_weighted_edges_from(edges)
-    result.add_nodes_from(nodes)
-    return result
-
-
 def get_spanning_trees(graph):
     edges = []
     nodes = []
